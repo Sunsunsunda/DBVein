@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      SERVER_ADDRESS: 0.0.0.0
+      DBVEIN_CRYPTO_KEY: ${DBVEIN_CRYPTO_KEY:?Set DBVEIN_CRYPTO_KEY in .env}
+    volumes:
+      - dbvein-data:/app/data
+  frontend:
+    build: ./frontend
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on:
+      - backend
+  demo-db:
+    image: mysql:8.4
+    profiles: [demo]
+    environment:
+      MYSQL_ROOT_PASSWORD: demo-root-local-only
+      MYSQL_DATABASE: dbvein_demo
+    volumes:
+      - ./examples/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+volumes:
+  dbvein-data:

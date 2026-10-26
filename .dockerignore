@@ -1,0 +1,10 @@
+**/node_modules
+**/target
+**/dist
+**/data
+backups
+.git
+.env
+**/*.db*
+
+.build-cache

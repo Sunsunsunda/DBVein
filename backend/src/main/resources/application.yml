@@ -1,0 +1,19 @@
+server:
+  port: ${SERVER_PORT:8081}
+  address: ${SERVER_ADDRESS:127.0.0.1}
+
+spring:
+  datasource:
+    url: jdbc:sqlite:${dbvein.data-dir:./data}/dbvein.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+    open-in-view: false
+
+dbvein:
+  data-dir: ${DBVEIN_DATA_DIR:./data}
+  crypto-key: ${DBVEIN_CRYPTO_KEY}
